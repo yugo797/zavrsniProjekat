@@ -1,18 +1,17 @@
 from pydantic import BaseModel
-from datetime import date
-
 
 class MovieBase(BaseModel):
     title: str
     description: str
-    duration: int
-    release_date: date
-    rating: float
-
+    year: int
 
 class MovieCreate(MovieBase):
-    pass
+    pass  
 
+class MovieUpdate(MovieBase):
+    title: str | None = None
+    description: str | None = None
+    year: int | None = None
 
 class Movie(MovieBase):
     id: int
