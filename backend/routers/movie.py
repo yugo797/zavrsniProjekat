@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ..schemas.movie import Movie, MovieCreate
-from ..crud.movie import get_movie, create_movie
-from ..database import get_db
+from schemas.movie import Movie, MovieCreate
+from crud.movie import get_movie, create_movie
+from database import get_db
 
 router = APIRouter()
 

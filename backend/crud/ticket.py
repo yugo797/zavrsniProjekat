@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.ticket import Ticket  
-from ..schemas.ticket import TicketCreate  
+from models.ticket import Ticket
+from schemas.ticket import TicketCreate
 
 
 def get_ticket(db: Session, ticket_id: int):

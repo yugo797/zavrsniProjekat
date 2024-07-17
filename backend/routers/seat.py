@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ..schemas.seat import Seat, SeatCreate
-from ..crud.seat import get_seat, create_seat
-from ..database import get_db
+from schemas.seat import Seat, SeatCreate
+from crud.seat import get_seat, create_seat
+from database import get_db
 
 router = APIRouter()
 

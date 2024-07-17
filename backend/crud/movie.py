@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.movie import Movie
-from ..schemas.movie import MovieCreate, MovieUpdate
+from models.movie import Movie
+from schemas.movie import MovieCreate, MovieUpdate
 
 
 def get_movie(db: Session, movie_id: int):

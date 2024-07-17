@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from ..models.user import User
-from ..schemas.user import UserCreate
-# from ..auth import get_password_hash
+from models.user import User
+from schemas.user import UserCreate
+# from auth import get_password_hash
 
 
 def get_user(db: Session, user_id: int):
@@ -15,7 +15,7 @@ def get_user_by_email(db: Session, email: str):
 def create_user(db: Session, user: UserCreate):
     if get_user_by_email(db, user.email):
         raise ValueError("Email already registered")
-     
+
     fake_hashed_password = user.password + "notreallyhashed"
     db_user = User(email=user.email, hashed_password=fake_hashed_password)
     # hashed_password = get_password_hash(user.password)

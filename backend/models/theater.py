@@ -11,13 +11,13 @@
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from ..database import Base
+from database import Base
 
 
 class Theater(Base):
     __tablename__ = 'theaters'
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
+    name = Column(String(26), index=True)
     location_id = Column(Integer, ForeignKey('locations.id'))
 
     location = relationship("Location", back_populates="theaters")
@@ -28,8 +28,8 @@ class Theater(Base):
 class Location(Base):
     __tablename__ = 'locations'
     id = Column(Integer, primary_key=True, index=True)
-    city = Column(String, index=True)
-    state = Column(String, index=True)
-    country = Column(String, index=True)
+    city = Column(String(30), index=True)
+    state = Column(String(30), index=True)
+    country = Column(String(30), index=True)
 
     theaters = relationship("Theater", back_populates="location")
