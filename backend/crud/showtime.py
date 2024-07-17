@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
-from ..models.showtime import Showtime  
-from ..schemas.showtime import ShowtimeCreate  
+from models.showtime import Showtime
+from schemas.showtime import ShowtimeCreate
+
 
 def get_showtime(db: Session, showtime_id: int):
     return db.query(Showtime).filter(Showtime.id == showtime_id).first()

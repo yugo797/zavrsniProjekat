@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ..schemas.showtime import Showtime, ShowtimeCreate
-from ..crud.showtime import get_showtime, create_showtime
-from ..database import get_db
+from schemas.showtime import Showtime, ShowtimeCreate
+from crud.showtime import get_showtime, create_showtime
+from database import get_db
 
 router = APIRouter()
 

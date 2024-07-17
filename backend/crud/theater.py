@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.theater import Theater  
-from ..schemas.theater import TheaterCreate  
+from models.theater import Theater
+from schemas.theater import TheaterCreate
 
 
 def get_theater(db: Session, theater_id: int):

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ..schemas.theater import Theater, TheaterCreate
-from ..crud.theater import get_theater, create_theater
-from ..database import get_db
+from schemas.theater import Theater, TheaterCreate
+from crud.theater import get_theater, create_theater
+from database import get_db
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.wishlist import Wishlist  
-from ..schemas.wishlist import WishlistCreate  
+from models.wishlist import Wishlist
+from schemas.wishlist import WishlistCreate
 
 
 def get_wishlist(db: Session, wishlist_id: int):

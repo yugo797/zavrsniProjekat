@@ -3,3 +3,7 @@ uvicorn
 sqlalchemy
 databases
 pydantic
+pymysql
+mysqlclient
+python-jose
+passlib[bcrypt]
