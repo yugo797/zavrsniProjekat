@@ -21,7 +21,7 @@
 # app.include_router(ticket.router, prefix="/tickets", tags=["tickets"])
 
 from fastapi import FastAPI
-from routers import user, movie, theater, showtime, seat, ticket, wishlist, category
+from routers import user, movie, theater, showtime, seat, ticket, wishlist, category, location
 from database import engine, Base
 
 app = FastAPI()
@@ -34,6 +34,7 @@ app.include_router(seat.router, prefix="/seats", tags=["seats"])
 app.include_router(ticket.router, prefix="/tickets", tags=["tickets"])
 app.include_router(wishlist.router, prefix="/wishlist", tags=["wishlist"])
 app.include_router(category.router, prefix="/category", tags=["category"])
+app.include_router(location.router, prefix="/location", tags=["location"])
 
 Base.metadata.create_all(bind=engine)
 

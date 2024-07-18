@@ -13,6 +13,10 @@ class TicketCreate(TicketBase):
     pass
 
 
+class TicketUpdate(TicketBase):
+    pass
+
+
 class Ticket(TicketBase):
     id: int
 

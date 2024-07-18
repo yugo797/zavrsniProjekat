@@ -4,6 +4,7 @@ from schemas.movie import Movie, MovieCreate, MovieUpdate
 from crud.movie import get_movie, create_movie, get_some_movies, get_all_movies, delete_movie, update_movie
 from database import get_db
 from typing import List
+
 router = APIRouter()
 
 

@@ -42,6 +42,14 @@ def update_user(
     return update(db=db, db_obj=user, obj_in=user_in)
 
 
+@router.delete("/{user_id}", response_model=User)
+def delete_existing_user(user_id: int, db: Session = Depends(get_db)):
+    db_user = delete_user(db, user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
+
+
 @router.post("/token")
 def login_for_access_token(form_data: UserCreate, db: Session = Depends(get_db)):
     user = get_user_by_email(db, form_data.email)

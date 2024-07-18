@@ -10,6 +10,10 @@ class TheaterCreate(TheaterBase):
     pass
 
 
+class TheaterUpdate(TheaterBase):
+    pass
+
+
 class Theater(TheaterBase):
     id: int
 

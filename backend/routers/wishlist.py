@@ -10,12 +10,12 @@ from typing import List
 router = APIRouter()
 
 
-@router.post("/wishlists/", response_model=Wishlist)
+@router.post("/", response_model=Wishlist)
 def create_new_wishlist(wishlist: WishlistCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     return create_wishlist(db=db, wishlist=wishlist)
 
 
-@router.get("/wishlists/{wishlist_id}", response_model=Wishlist)
+@router.get("/{wishlist_id}", response_model=Wishlist)
 def read_wishlist(wishlist_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     db_wishlist = get_wishlist(db, wishlist_id)
     if db_wishlist is None:
@@ -23,12 +23,12 @@ def read_wishlist(wishlist_id: int, db: Session = Depends(get_db), current_user:
     return db_wishlist
 
 
-@router.get("/wishlists/", response_model=List[Wishlist])
+@router.get("/", response_model=List[Wishlist])
 def read_user_wishlists(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     return get_wishlist_by_user(db, user_id=current_user.id)
 
 
-@router.put("/wishlists/{wishlist_id}", response_model=Wishlist)
+@router.put("/{wishlist_id}", response_model=Wishlist)
 def update_existing_wishlist(wishlist_id: int, wishlist: WishlistUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     db_wishlist = get_wishlist(db, wishlist_id)
     if db_wishlist is None:
@@ -39,7 +39,7 @@ def update_existing_wishlist(wishlist_id: int, wishlist: WishlistUpdate, db: Ses
     return update_wishlist(db=db, wishlist=wishlist, wishlist_id=wishlist_id)
 
 
-@router.delete("/wishlists/{wishlist_id}", response_model=Wishlist)
+@router.delete("/{wishlist_id}", response_model=Wishlist)
 def delete_existing_wishlist_item(wishlist_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     db_wishlist = delete_wishlist_item(db, wishlist_id)
     if db_wishlist is None:
