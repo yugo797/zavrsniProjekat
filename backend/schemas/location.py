@@ -2,9 +2,8 @@ from pydantic import BaseModel
 
 
 class LocationBase(BaseModel):
-    city: str
-    state: str
-    country: str
+    city: str = "Podgorica"
+    country: str = "Crna Gora"
 
 
 class LocationCreate(LocationBase):

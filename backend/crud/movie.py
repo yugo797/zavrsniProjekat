@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.movie import Movie
+from models.movie import Movie, MovieCategory
 from schemas.movie import MovieCreate, MovieUpdate
 
 
@@ -8,10 +8,23 @@ def get_movie(db: Session, movie_id: int):
 
 
 def create_movie(db: Session, movie: MovieCreate):
-    db_movie = Movie(**movie.dict())
+    db_movie = Movie(
+        title=movie.title,
+        description=movie.description,
+        duration=movie.duration,
+        release_date=movie.release_date,
+        rating=movie.rating,
+    )
     db.add(db_movie)
     db.commit()
     db.refresh(db_movie)
+    for category_id in movie.categories:
+        db_movie_category = MovieCategory(
+            movie_id=db_movie.id, category_id=category_id)
+        db.add(db_movie_category)
+        db.commit()
+        db.refresh(db_movie_category)
+
     return db_movie
 
 
@@ -35,3 +48,7 @@ def delete_movie(db: Session, movie_id: int):
 
 def get_all_movies(db: Session):
     return db.query(Movie).all()
+
+
+def get_some_movies(db: Session, skip: int = 0, limit: int = 10):
+    return db.query(Movie).offset(skip).limit(limit).all()

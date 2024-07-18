@@ -1,20 +1,29 @@
 from pydantic import BaseModel
+from typing import List, Optional
+from datetime import date
+from .category import Category
+
 
 class MovieBase(BaseModel):
     title: str
     description: str
-    year: int
+    duration: int
+    release_date: date
+    rating: float
+
 
 class MovieCreate(MovieBase):
-    pass  
+    categories: List[int] = []
+
 
 class MovieUpdate(MovieBase):
     title: str | None = None
     description: str | None = None
-    year: int | None = None
+
 
 class Movie(MovieBase):
     id: int
+    categories: List[Category] = []
 
     class Config:
         orm_mode = True
