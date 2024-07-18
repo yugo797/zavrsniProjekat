@@ -10,6 +10,10 @@ class WishlistCreate(WishlistBase):
     pass
 
 
+class WishlistUpdate(WishlistBase):
+    pass
+
+
 class Wishlist(WishlistBase):
     id: int
 
