@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.post("/", response_model=Wishlist)
 def create_new_wishlist(wishlist: WishlistCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    return create_wishlist(db=db, wishlist=wishlist)
+    return create_wishlist(db=db, wishlist=wishlist, user=current_user.id)
 
 
 @router.get("/{wishlist_id}", response_model=Wishlist)

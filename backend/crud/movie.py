@@ -14,6 +14,8 @@ def create_movie(db: Session, movie: MovieCreate):
         duration=movie.duration,
         release_date=movie.release_date,
         rating=movie.rating,
+        image=movie.image,
+        video=movie.video
     )
     db.add(db_movie)
     db.commit()

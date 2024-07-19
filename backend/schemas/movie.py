@@ -10,6 +10,8 @@ class MovieBase(BaseModel):
     duration: int
     release_date: date
     rating: float
+    image: str
+    video: str
 
 
 class MovieCreate(MovieBase):
