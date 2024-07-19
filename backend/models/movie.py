@@ -32,7 +32,6 @@ class Movie(Base):
     showtimes = relationship("Showtime", back_populates="movie")
     wishlists = relationship("Wishlist", secondary='wishlist_movie_association', back_populates="movies")
 
-
 class Category(Base):
     __tablename__ = 'categories'
     id = Column(Integer, primary_key=True, index=True)
