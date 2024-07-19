@@ -13,6 +13,10 @@ class ShowtimeCreate(ShowtimeBase):
     pass
 
 
+class ShowtimeUpdate(ShowtimeBase):
+    pass
+
+
 class Showtime(ShowtimeBase):
     id: int
 

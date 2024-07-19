@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.seat import Seat 
-from ..schemas.seat import SeatCreate  
+from models.seat import Seat
+from schemas.seat import SeatCreate
 
 
 def get_seat(db: Session, seat_id: int):

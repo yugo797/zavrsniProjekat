@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
-from ..database import Base
+from database import Base
 
 
 wishlist_movie_association = Table(

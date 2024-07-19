@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.wishlist import Wishlist  
-from ..schemas.wishlist import WishlistCreate  
+from models.wishlist import Wishlist
+from schemas.wishlist import WishlistCreate, WishlistUpdate
 
 
 def get_wishlist(db: Session, wishlist_id: int):
@@ -16,6 +16,16 @@ def create_wishlist(db: Session, wishlist: WishlistCreate):
     db.add(db_wishlist)
     db.commit()
     db.refresh(db_wishlist)
+    return db_wishlist
+
+
+def update_wishlist(db: Session, wishlist: WishlistUpdate, wishlist_id: int):
+    db_wishlist = db.query(Wishlist).filter(Wishlist.id == wishlist_id).first()
+    if db_wishlist:
+        for key, value in wishlist.dict(exclude_unset=True).items():
+            setattr(db_wishlist, key, value)
+        db.commit()
+        db.refresh(db_wishlist)
     return db_wishlist
 
 

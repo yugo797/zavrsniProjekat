@@ -11,6 +11,10 @@ class SeatCreate(SeatBase):
     pass
 
 
+class SeatUpdate(SeatBase):
+    pass
+
+
 class Seat(SeatBase):
     id: int
 
