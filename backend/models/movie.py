@@ -29,7 +29,7 @@ class Movie(Base):
     categories = relationship(
         "Category", secondary="movie_categories", back_populates="movies")
     showtimes = relationship("Showtime", back_populates="movie")
-    wishlist = relationship("Wishlist", back_populates="movie")
+    wishlists = relationship("Wishlist", secondary='wishlist_movie_association', back_populates="movies")
 
 
 class Category(Base):

@@ -12,4 +12,5 @@ class User(Base):
     hashed_password = Column(String)
 
     tickets = relationship("Ticket", back_populates="user")
-    wishlist = relationship("Wishlist", back_populates="user")
+    wishlist = relationship("Wishlist", uselist=False, back_populates="user")
+
