@@ -13,4 +13,5 @@ class User(Base):
     is_admin = Column(Boolean, default=False)
 
     tickets = relationship("Ticket", back_populates="user")
-    wishlist = relationship("Wishlist", back_populates="user")
+    wishlist = relationship("Wishlist", uselist=False, back_populates="user")
+
