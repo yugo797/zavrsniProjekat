@@ -1,0 +1,77 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  min-height: 100vh;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputContainer {
+  color: white;
+  height: 30em;
+  width: 340px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border-radius: 78px;
+}
+.inputField {
+  color: black;
+  padding-left: 15px;
+  height: 38px;
+  width: 85%;
+  border-radius: 78px;
+  background-color: aliceblue;
+}
+
+.button {
+  margin-top: 25px;
+  margin-bottom: 0;
+  border-radius: 78px;
+  background-color: #009a9a;
+  /*#ff1000;*/
+  height: 40px;
+  font-size: 17px;
+  font-weight: 550;
+  width: fit-content;
+  padding: 25px 28px 25px 28px;
+  border: none;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  box-shadow: 3px 2px 18px 1px rgba(43, 43, 43, 0.534);
+}
+
+.otherformlink {
+  margin-top: 15px;
+  margin-bottom: 13px;
+  color: #050000;
+}
+.linktoreg {
+  text-decoration: none;
+  color: inherit;
+}
