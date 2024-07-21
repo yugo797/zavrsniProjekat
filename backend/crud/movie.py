@@ -52,5 +52,9 @@ def get_all_movies(db: Session):
     return db.query(Movie).all()
 
 
+# def get_movies_with_categories(db: Session):
+#     return db.query(Movie).join(Movie.categories).all()
+
+
 def get_some_movies(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Movie).offset(skip).limit(limit).all()
