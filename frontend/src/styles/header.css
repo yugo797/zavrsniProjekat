@@ -1,0 +1,46 @@
+.hContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    background-color: #191919;
+}
+.imgContainer{
+    flex: 1;
+    display: flex;
+    height: 100%;
+    justify-content: flex-start; 
+    align-items: center;
+}
+.logoLink{
+    text-decoration: none;
+}
+
+.logoImg{
+    height: 100%;
+}
+
+.navBtns{
+    flex: 2;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 5px;
+}
+
+.navLink{
+    color: #e7e5e5;
+    text-decoration: none;
+}
+
+.pImg{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Aligns profile image to the right */
+    align-items: center;
+}
+
+.pImg img{
+    height: 100%;
+}
