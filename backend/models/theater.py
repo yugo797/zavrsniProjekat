@@ -29,7 +29,7 @@ class Location(Base):
     __tablename__ = 'locations'
     id = Column(Integer, primary_key=True, index=True)
     city = Column(String(30), index=True)
-    # state = Column(String(30), index=True)
+    place = Column(String(200), index=True)
     country = Column(String(30), index=True)
 
     theaters = relationship("Theater", back_populates="location")
