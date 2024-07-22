@@ -21,10 +21,20 @@
 # app.include_router(ticket.router, prefix="/tickets", tags=["tickets"])
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from routers import user, movie, theater, showtime, seat, ticket, wishlist, category, location
 from database import engine, Base
 
 app = FastAPI()
+
+#DODALA MILICA!!!!
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(user.router, prefix="/users", tags=["users"])
 app.include_router(movie.router, prefix="/movies", tags=["movies"])
