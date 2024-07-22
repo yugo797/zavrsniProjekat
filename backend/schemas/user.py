@@ -8,7 +8,6 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
-    is_admin: bool = False
 
 
 class UserUpdate(UserBase):
@@ -18,7 +17,7 @@ class UserUpdate(UserBase):
 
 class User(UserBase):
     id: int
-    is_admin: bool
+    is_admin: bool = False
 
     class Config:
         orm_mode = True
