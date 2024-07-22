@@ -1,8 +1,13 @@
 import React from "react";
 import "../styles/loginStyle.css";
 import { Link } from "react-router-dom";
-
+// uvicorn main:app --reload
 const Login = () => {
+
+  handleLogin = () => {
+    console.log("login");
+  };
+
   return (
     <>
       <div className="container">
