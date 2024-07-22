@@ -34,7 +34,7 @@ const Register = () => {
       const response = await fetch(url, requestOptions);
       if (response.ok) {
         const data = await response.json();
-        setToken(data.accessToken);
+        setToken(data.access_token);
         console.log('Uspješna registracija');
       } else {
         setError('Neuspješna registracija');
