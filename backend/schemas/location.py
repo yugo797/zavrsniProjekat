@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class LocationBase(BaseModel):
     city: str = "Podgorica"
     country: str = "Crna Gora"
-    place: str = None
+    place: str
 
 
 class LocationCreate(LocationBase):

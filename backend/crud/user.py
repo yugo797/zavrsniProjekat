@@ -21,7 +21,7 @@ def create_user(db: Session, user: UserCreate):
     #                is_admin=user.is_admin if user.is_admin is not None else False)
     hashed_password = get_password_hash(user.password)
     db_user = User(email=user.email,
-                   hashed_password=hashed_password, name=user.name, is_admin=user.is_admin if user.is_admin is not None else False)
+                   hashed_password=hashed_password, name=user.name)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
