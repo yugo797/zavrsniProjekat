@@ -7,3 +7,4 @@ pymysql
 mysqlclient
 python-jose
 passlib[bcrypt]
+alembic
