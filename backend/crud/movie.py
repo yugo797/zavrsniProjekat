@@ -14,6 +14,8 @@ def create_movie(db: Session, movie: MovieCreate):
         duration=movie.duration,
         release_date=movie.release_date,
         rating=movie.rating,
+        image=movie.image,
+        video=movie.video
     )
     db.add(db_movie)
     db.commit()
@@ -48,6 +50,10 @@ def delete_movie(db: Session, movie_id: int):
 
 def get_all_movies(db: Session):
     return db.query(Movie).all()
+
+
+# def get_movies_with_categories(db: Session):
+#     return db.query(Movie).join(Movie.categories).all()
 
 
 def get_some_movies(db: Session, skip: int = 0, limit: int = 10):
