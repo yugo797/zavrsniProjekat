@@ -1,0 +1,77 @@
+:root {
+  --background-color: #1a1a1d;
+  --accent-color: #4e4e50;
+  --highlight-color: #c3073f;
+  --text-primary: #e6e6e6;
+  --text-secondary: #cccccc;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.homepage-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.button-container {
+  margin: 20px 0;
+}
+
+.button-container button {
+  background-color: var(--highlight-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.button-container button:hover {
+  background-color: #a30634;
+}
+
+.movies-container {
+  background-color: var(--accent-color);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.movie-card {
+  background-color: var(--background-color);
+  border: 1px solid var(--highlight-color);
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  width: calc(25% - 20px);
+  box-sizing: border-box;
+  color: var(--text-primary);
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.movie-card .description {
+  max-height: 6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}

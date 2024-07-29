@@ -5,46 +5,45 @@ import ErrorMsg from "../assets/ErrorMsg";
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserCont";
 
-
 const Login = () => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { setToken } = useContext(UserContext);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  const handleLogin = async () => { 
+  const handleLogin = async () => {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
         password: password,
-        name: "milica",
+        name: "1234",
         is_admin: false,
       }),
     };
 
-    const response = await fetch('http://localhost:8000/users/token', requestOptions);
+    const response = await fetch(
+      "http://localhost:8000/users/token",
+      requestOptions
+    );
     const data = await response.json();
 
     if (response.ok) {
       setToken(data.access_token);
-      console.log('Uspješna prijava');
+      console.log("Uspješna prijava");
     } else {
-      setError('Neuspješna prijava');
-      console.log('Neuspješna prijava');
+      setError("Neuspješna prijava");
+      console.log("Neuspješna prijava");
     }
-
-  }
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
     handleLogin();
-  }
-
+  };
 
   return (
     <>
