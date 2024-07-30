@@ -8,7 +8,7 @@ import { UserContext } from "../context/UserCont";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken } = useContext(UserContext);
+  const { setToken, setUser } = useContext(UserContext);
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
@@ -20,23 +20,43 @@ const Login = () => {
       body: JSON.stringify({
         email: email,
         password: password,
-        name: "1234",
+        name: "milica",
         is_admin: false,
       }),
     };
 
-    const response = await fetch(
-      "http://localhost:8000/users/token",
-      requestOptions
-    );
-    const data = await response.json();
+    try {
+      const response = await fetch(
+        "http://localhost:8000/users/token",
+        requestOptions
+      );
+      const data = await response.json();
 
-    if (response.ok) {
-      setToken(data.access_token);
-      console.log("Uspješna prijava");
-    } else {
-      setError("Neuspješna prijava");
-      console.log("Neuspješna prijava");
+      if (response.ok) {
+        setToken(data.access_token);
+        console.log("Uspješna prijava");
+
+        const userResponse = await fetch(
+          `http://localhost:8000/users/email/?user_email=${email}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${data.access_token}`,
+            },
+          }
+        );
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          setUser(userData);
+        } else {
+          console.error("Failed to fetch user details");
+        }
+      } else {
+        setError("Neuspješna prijava");
+        console.log("Neuspješna prijava");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
