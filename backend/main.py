@@ -24,6 +24,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import user, movie, theater, showtime, seat, ticket, wishlist, category, location
 from database import engine, Base
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -36,6 +40,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+logger.info("CORS middleware applied")
+
+
 app.include_router(user.router, prefix="/users", tags=["users"])
 app.include_router(movie.router, prefix="/movies", tags=["movies"])
 app.include_router(theater.router, prefix="/theaters", tags=["theaters"])
@@ -46,9 +53,11 @@ app.include_router(wishlist.router, prefix="/wishlist", tags=["wishlist"])
 app.include_router(category.router, prefix="/category", tags=["category"])
 app.include_router(location.router, prefix="/location", tags=["location"])
 
+logger.info("Routers included")
+
 Base.metadata.create_all(bind=engine)
 
-
+logger.info("Database tables created")
 # @app.on_event("startup")
 # async def startup():
 #     await database.connect()

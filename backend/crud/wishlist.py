@@ -9,7 +9,10 @@ def get_wishlist(db: Session, wishlist_id: int):
 
 
 def get_wishlist_by_user(db: Session, user_id: int):
-    return db.query(Wishlist).filter(Wishlist.user_id == user_id).first()
+    wishlist = db.query(Wishlist).filter(Wishlist.user_id == user_id).first()
+    if wishlist is None:
+        return []
+    return wishlist
 
 
 def create_wishlist(db: Session, wishlist: WishlistCreate, user):
