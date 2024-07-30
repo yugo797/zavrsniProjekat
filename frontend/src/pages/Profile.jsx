@@ -11,12 +11,19 @@ const Profile = () => {
 
   const { userId } = useParams();
   useEffect(() => {
+    const oldToken = localStorage.getItem("accesstoken");
+    if (oldToken) {
+      localStorage.setItem("access_token", oldToken);
+      localStorage.removeItem("accesstoken");
+    }
+    const token = localStorage.getItem("access_token");
+    console.log("ACC TKN: ", token);
     const getUser = async () => {
       try {
         const response = await fetch(`http://localhost:8000/users/${userId}`, {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         if (response.ok) {
@@ -35,21 +42,34 @@ const Profile = () => {
 
     const getWishlist = async () => {
       try {
+        if (!token) {
+          throw new Error("No token found");
+        }
         const response = await fetch("http://localhost:8000/wishlist", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         });
+        console.log("Wishlist Response Status: ", response.status);
+
         if (response.ok) {
           const data = await response.json();
-          setWishlist(data.movie_ids);
+          setWishlist(data);
           setLoading(false);
         } else {
-          setError("Failed to fetch wishlist 1111"); //ulazi
+          const errorData = await response.json();
+          console.error("Wishlist Fetch Error: ", errorData);
+          setError(
+            `Failed to fetch wishlist: ${
+              errorData.detail || response.statusText
+            }`
+          );
           setLoading(false);
         }
       } catch (err) {
+        console.error("Wishlist Fetch Exception: ", err);
+
         setError("Failed to fetch wishlist 2222");
         setLoading(false);
       }
@@ -78,6 +98,15 @@ const Profile = () => {
         <br />
         <div className="wishlist">
           <h3>Movie Wishlist</h3>
+          <ul>
+            {wishlist.length === 0 ? (
+              <>
+                <li>empu...</li>
+              </>
+            ) : (
+              wishlist.map((movie) => <li key={movie}>{movie}</li>)
+            )}
+          </ul>
         </div>
       </div>
     </>

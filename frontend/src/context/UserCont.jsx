@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = (props) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("accesstoken"));
+  const [token, setToken] = useState(localStorage.getItem("access_token"));
 
   useEffect(() => {
     const fetchUser = async (id) => {
@@ -19,7 +19,7 @@ const UserProvider = (props) => {
       try {
         const response = await fetch(url, requestOptions);
         if (response.ok) {
-          localStorage.setItem("accesstoken", token);
+          localStorage.setItem("access_token", token);
           console.log("User fetched");
         } else {
           console.log("User not fetched");

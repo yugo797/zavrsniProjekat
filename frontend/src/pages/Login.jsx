@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/loginStyle.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorMsg from "../assets/ErrorMsg";
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserCont";
@@ -10,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { setToken, setUser } = useContext(UserContext);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     const requestOptions = {
@@ -20,8 +21,8 @@ const Login = () => {
       body: JSON.stringify({
         email: email,
         password: password,
-        name: "milica",
         is_admin: false,
+        name: "user",
       }),
     };
 
@@ -30,10 +31,10 @@ const Login = () => {
         "http://localhost:8000/users/token",
         requestOptions
       );
-      const data = await response.json();
 
       if (response.ok) {
-        setToken(data.access_token);
+        const data = await response.json();
+        localStorage.setItem("access_token", data.access_token);
         console.log("Uspješna prijava");
 
         const userResponse = await fetch(
@@ -48,6 +49,7 @@ const Login = () => {
         if (userResponse.ok) {
           const userData = await userResponse.json();
           setUser(userData);
+          navigate(`/profile/${userData.id}`);
         } else {
           console.error("Failed to fetch user details");
         }
@@ -87,6 +89,7 @@ const Login = () => {
           <button type="button" className="button" onClick={handleClick}>
             Prijavi se
           </button>
+          {error && <ErrorMsg>{error}</ErrorMsg>}
           <span className="otherformlink">
             <Link to="/register" className="linktoreg">
               Nemate nalog? <b>Registrujte se ovdje</b>
