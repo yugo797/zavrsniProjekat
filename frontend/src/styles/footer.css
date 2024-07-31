@@ -1,0 +1,15 @@
+.footer {
+  max-height: 40px;
+  min-height: 35px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 29px;
+}
+.nekinaslov {
+  color: white;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
