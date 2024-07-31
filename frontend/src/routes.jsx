@@ -4,12 +4,15 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import LogoutBtn from "./pages/LogoutBtn";
+import Layout from "./Layout";
 export const routes = (
   <Routes>
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="logout" element={<LogoutBtn />} />
+      <Route path="profile/:userId" element={<Profile />} />
+    </Route>
     <Route path="/login" element={<Login />} />
-    <Route path="/logout" element={<LogoutBtn />} />
     <Route path="/register" element={<Register />} />
-    <Route path="/profile/:userId" element={<Profile />} />
   </Routes>
 );
