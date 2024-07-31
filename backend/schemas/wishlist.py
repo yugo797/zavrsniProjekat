@@ -19,4 +19,4 @@ class Wishlist(WishlistBase):
     movie_ids: List[int] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True  

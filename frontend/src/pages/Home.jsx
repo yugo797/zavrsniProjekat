@@ -63,12 +63,8 @@ const Home = () => {
         <h1>Dobrodosli</h1>
         <div className="button-container">
           <button onClick={() => setView("all")}>Svi filmovi</button>
-          <button onClick={() => setView("topRated")}>
-            Najbolje ocjenjeni
-          </button>
-          <button onClick={() => setView("currentlyShowing")}>
-            Trenutno u bioskopu
-          </button>
+          <button onClick={() => setView("topRated")}>Najbolje ocjenjeni</button>
+          <button onClick={() => setView("currentlyShowing")}>Trenutno u bioskopu</button>
           <button onClick={() => setView("upcoming")}>Uskoro</button>
         </div>
         <div className="movies-container">
@@ -88,6 +84,7 @@ const Home = () => {
       </div>
     </>
   );
+  
 };
 
 export default Home;
