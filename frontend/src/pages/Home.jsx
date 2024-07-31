@@ -5,6 +5,7 @@ import "../styles/home.css";
 const Home = () => {
   const [view, setView] = useState("topRated");
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -12,6 +13,7 @@ const Home = () => {
         const response = await fetch("http://localhost:8000/movies/");
         const data = await response.json();
         setMovies(data);
+        setFilteredMovies(data);
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
@@ -20,8 +22,12 @@ const Home = () => {
     fetchMovies();
   }, [view]);
 
-  const renderMovies = () => {
-    const filteredMovies = movies.filter((movie) => {
+  useEffect(() => {
+    filterMovies();
+  }, [view, movies]);
+
+  const filterMovies = () => {
+    const filtered = movies.filter((movie) => {
       switch (view) {
         case "topRated":
           return movie.rating >= 2;
@@ -30,11 +36,11 @@ const Home = () => {
         case "upcoming":
           return new Date(movie.release_date) > new Date();
         default:
-          return false;
+          return true;
       }
     });
 
-    return (
+    /*return (
       <div className="movies-list">
         {filteredMovies.map((movie) => (
           <div key={movie.id} className="movie-card">
@@ -47,22 +53,37 @@ const Home = () => {
           </div>
         ))}
       </div>
-    );
+    );*/
+    setFilteredMovies(filtered);
   };
 
   return (
     <>
-      <div className="homepage-container">
-        <h1>Welcome to Cinema</h1>
+      <div className="homeContainer">
+        <h1>Dobrodosli</h1>
         <div className="button-container">
-          <button onClick={() => setView("topRated")}>Top Rated Movies</button>
-          <button onClick={() => setView("currentlyShowing")}>
-            Currently Showing
+          <button onClick={() => setView("all")}>Svi filmovi</button>
+          <button onClick={() => setView("topRated")}>
+            Najbolje ocjenjeni
           </button>
-          <button onClick={() => setView("upcoming")}>Upcoming Movies</button>
+          <button onClick={() => setView("currentlyShowing")}>
+            Trenutno u bioskopu
+          </button>
+          <button onClick={() => setView("upcoming")}>Uskoro</button>
         </div>
         <div className="movies-container">
-          <div className="movies-list">{renderMovies()}</div>
+          <div className="movies-list">
+            {filteredMovies.map((movie) => (
+              <div key={movie.id} className="movie-card">
+                <h3>{movie.title}</h3>
+                <img src={movie.image} alt={movie.title} />
+                <p className="description">{movie.description}</p>
+                <p>Duration: {movie.duration} mins</p>
+                <p>Release Date: {movie.release_date}</p>
+                <p>Rating: {movie.rating}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
