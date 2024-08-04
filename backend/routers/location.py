@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from schemas.location import Location, LocationCreate
-from crud.location import get_location, create_location
+from crud.location import get_location, create_location, get_all_locations
 from database import get_db
 
 router = APIRouter()
@@ -11,6 +11,9 @@ router = APIRouter()
 def create_new_location(location: LocationCreate, db: Session = Depends(get_db)):
     return create_location(db=db, location=location)
 
+@router.get("/", response_model=list[Location])
+def read_all_locations(db: Session = Depends(get_db)):
+    return get_all_locations(db)
 
 @router.get("/{location_id}", response_model=Location)
 def read_location(location_id: int, db: Session = Depends(get_db)):

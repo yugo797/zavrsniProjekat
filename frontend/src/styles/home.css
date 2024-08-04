@@ -20,7 +20,7 @@
 
 .button-container button {
   background-color: var(--highlight-color);
-  color: white;
+  color: var(--text-primary);
   border: none;
   padding: 10px 20px;
   margin: 0 10px;
@@ -30,7 +30,7 @@
 }
 
 .button-container button:hover {
-  background-color: #a30634;
+  background-color: var(--highlight-color);
 }
 
 .movies-container {

@@ -6,6 +6,8 @@ from schemas.location import LocationCreate
 def get_location(db: Session, location_id: int):
     return db.query(Location).filter(Location.id == location_id).first()
 
+def get_all_locations(db: Session):
+    return db.query(Location).all()
 
 def create_location(db: Session, location: LocationCreate):
     db_location = Location(**location.dict())

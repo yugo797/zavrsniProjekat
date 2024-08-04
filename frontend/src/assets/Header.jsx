@@ -1,11 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../styles/header.css";
+import { UserContext } from "../context/UserCont";
+
 const Header = () => {
   //const navigate = useNavigate();
   //logout handling za prikazivanje log in/ log out
-  const user = false;
+  const { user } = useContext(UserContext);
+
   return (
     <>
       <div className="hContainer">
@@ -17,31 +20,34 @@ const Header = () => {
 
         <nav className="navBtns">
           <Link to={"/"} className="navLink">
-            Home
+            Početna stranica
           </Link>
           <Link to={"/profile"} className="navLink">
-            Profile
+            Profil
           </Link>
 
           {user ? (
-            <Link to="/profile" className="navLink">
-              Logged in
+            <Link to={`/profile/${user.id}`} className="navLink">
+              Prijavljeni ste kao {user.username}
             </Link>
           ) : (
             <Link to={"/login"} className="navLink">
-              Log in
+              Prijavi se
             </Link>
           )}
-
-          <Link to={"/register"} className="navLink">
-            Register
-          </Link>
         </nav>
 
         <div className="pImg">
-          <Link to={"/profile"} className="pImgLink">
-            <img src="" alt="profile image" />
-          </Link>
+          {user ? (
+            <Link to={`/profile/${user.id}`} className="pImgLink">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                alt="profile image"
+              />
+            </Link>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>
