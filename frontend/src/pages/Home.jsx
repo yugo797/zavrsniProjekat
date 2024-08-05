@@ -3,7 +3,7 @@ import Header from "../assets/Header";
 import "../styles/home.css";
 
 const Home = () => {
-  const [view, setView] = useState("topRated");
+  const [view, setView] = useState("all");
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
