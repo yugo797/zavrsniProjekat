@@ -34,7 +34,7 @@ const Home = () => {
         case "topRated":
           return movie.rating >= 2;
         case "currentlyShowing":
-          return new Date(movie.release_date) <= new Date(); // provjeri je li ovako za datume
+          return new Date(movie.release_date) <= new Date();
         case "upcoming":
           return new Date(movie.release_date) > new Date();
         default:
@@ -45,27 +45,29 @@ const Home = () => {
     setFilteredMovies(filtered);
   };
 
-  const addToWishlist = async(movieId) => {
+  const addToWishlist = async (movieId) => {
     const token = localStorage.getItem("access_token");
-    try{
+    try {
       const resp = await fetch(`http://localhost:8000/wishlist/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      let wishlistId;
-      if(resp.ok){
-        const wishlist = await resp.json();
-        if (wishlist.length>0){
-          wishlistId = wishlist[0].id;
+      const wishlist = await resp.json();
+      let wishlistId = null;
+      if (wishlist.length > 0) {
+        wishlistId = wishlist[0].id;
+
+        const movieExists = wishlist[0].movie_ids.includes(movieId);
+        if (movieExists) {
+          console.log(`Movie ${movieId} already in wishlist`);
+          return;
         }
-        console.log(`Movie ${movieId} added to wishlist`);
-      } else {
-        console.error("Failed to add movie to wishlist");
       }
 
-      if(!wishlistId){
+      if (!wishlistId) {
+        console.log(`Creating new wishlist for user ${userId}`);
         const createResp = await fetch(`http://localhost:8000/wishlist/`, {
           method: "POST",
           headers: {
@@ -77,19 +79,36 @@ const Home = () => {
             movie_ids: [movieId],
           }),
         });
-        if (createResp.ok){
+        if (createResp.ok) {
           const newWL = await createResp.json();
           wishlistId = newWL.id;
           console.log(`new wishlist ${wishlistId}`);
         } else {
           console.error("Failed to add movie to wishlist");
+          return;
+        }
+      } else {
+        const updateResp = await fetch(`http://localhost:8000/wishlist/${wishlistId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            movie_ids: [...wishlist[0].movie_ids, movieId],
+          }),
+        });
+        if (updateResp.ok) {
+          console.log(`Movie ${movieId} added to wishlist ${wishlistId}`);
+        } else {
+          console.error("Failed to add movie to wishlist");
         }
       }
-
-    } catch(err) {
-      console.error("Error adding movie to wishlist", err);
+    } catch (error) {
+      console.error("Error adding movie to wishlist: ", error);
     }
-  }
+  };
+
   return (
     <>
       <div className="homeContainer">
@@ -110,7 +129,7 @@ const Home = () => {
                 <p>Duration: {movie.duration} mins</p>
                 <p>Release Date: {movie.release_date}</p>
                 <p>Rating: {movie.rating}</p>
-                <button onClick={()=>addToWishlist(movie.id)}  >Dodaj u watchlist</button>
+                <button onClick={() => addToWishlist(movie.id)}>Dodaj u watchlist</button>
               </div>
             ))}
           </div>
@@ -118,7 +137,6 @@ const Home = () => {
       </div>
     </>
   );
-  
 };
 
 export default Home;

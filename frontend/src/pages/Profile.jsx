@@ -49,7 +49,7 @@ const Profile = () => {
     }
     const getUser = async (userEmailToken) => {
       try {
-        const response = await fetch(`http://localhost:8000/users/email/${userEmailToken}`, {
+        const response = await fetch(`http://localhost:8000/users/email/?user_email=${userEmailToken}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
