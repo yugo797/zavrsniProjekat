@@ -8,21 +8,24 @@ import { UserContext } from "../context/UserCont";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const { setToken, setUser } = useContext(UserContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        //username: username,
         email: email,
         password: password,
-        is_admin: false,
-        name: "user",
+        name: username,
+        //is_admin: false,
       }),
     };
 
@@ -36,6 +39,7 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem("access_token", data.access_token);
         console.log("Uspješna prijava");
+        console.log("Token after login: ", localStorage.getItem("access_token"));
 
         const userResponse = await fetch(
           `http://localhost:8000/users/email/?user_email=${email}`,
@@ -49,7 +53,8 @@ const Login = () => {
         if (userResponse.ok) {
           const userData = await userResponse.json();
           setUser(userData);
-          navigate(`/profile/${userData.id}`);
+
+          navigate(`/`); //profile/${userData.id}
         } else {
           console.error("Failed to fetch user details");
         }
@@ -75,13 +80,23 @@ const Login = () => {
           type="email"
           className="auth-inputField"
           placeholder="E-mail adresa"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          className="auth-inputField"
+          placeholder="Korisnicko ime"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <input
           type="password"
           className="auth-inputField"
           placeholder="Lozinka"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />

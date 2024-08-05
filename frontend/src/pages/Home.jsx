@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Header from "../assets/Header";
 import "../styles/home.css";
+import { UserContext } from "../context/UserCont";
 
 const Home = () => {
   const [view, setView] = useState("all");
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const { userId, token1 } = useContext(UserContext);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -40,23 +42,54 @@ const Home = () => {
       }
     });
 
-    /*return (
-      <div className="movies-list">
-        {filteredMovies.map((movie) => (
-          <div key={movie.id} className="movie-card">
-            <img src={movie.image} alt={movie.title} />
-            <h3>{movie.title}</h3>
-            <p className="description">{movie.description}</p>
-            <p>Duration: {movie.duration} mins</p>
-            <p>Release Date: {movie.release_date}</p>
-            <p>Rating: {movie.rating}</p>
-          </div>
-        ))}
-      </div>
-    );*/
     setFilteredMovies(filtered);
   };
 
+  const addToWishlist = async(movieId) => {
+    const token = localStorage.getItem("access_token");
+    try{
+      const resp = await fetch(`http://localhost:8000/wishlist/${userId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      let wishlistId;
+      if(resp.ok){
+        const wishlist = await resp.json();
+        if (wishlist.length>0){
+          wishlistId = wishlist[0].id;
+        }
+        console.log(`Movie ${movieId} added to wishlist`);
+      } else {
+        console.error("Failed to add movie to wishlist");
+      }
+
+      if(!wishlistId){
+        const createResp = await fetch(`http://localhost:8000/wishlist/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            movie_ids: [movieId],
+          }),
+        });
+        if (createResp.ok){
+          const newWL = await createResp.json();
+          wishlistId = newWL.id;
+          console.log(`new wishlist ${wishlistId}`);
+        } else {
+          console.error("Failed to add movie to wishlist");
+        }
+      }
+
+    } catch(err) {
+      console.error("Error adding movie to wishlist", err);
+    }
+  }
   return (
     <>
       <div className="homeContainer">
@@ -77,6 +110,7 @@ const Home = () => {
                 <p>Duration: {movie.duration} mins</p>
                 <p>Release Date: {movie.release_date}</p>
                 <p>Rating: {movie.rating}</p>
+                <button onClick={()=>addToWishlist(movie.id)}  >Dodaj u watchlist</button>
               </div>
             ))}
           </div>
