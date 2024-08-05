@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/loginStyle.css";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorMsg from "../assets/ErrorMsg";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../context/UserCont";
 
 const Login = () => {
@@ -68,36 +68,34 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className="container">
-        <div className="inputContainer">
-          <input
-            type="email"
-            className="inputField"
-            placeholder="email adresa"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="inputField"
-            placeholder="lozinka"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <button type="button" className="button" onClick={handleClick}>
-            Prijavi se
-          </button>
-          {error && <ErrorMsg>{error}</ErrorMsg>}
-          <span className="otherformlink">
-            <Link to="/register" className="linktoreg">
-              Nemate nalog? <b>Registrujte se ovdje</b>
-            </Link>
-          </span>
-        </div>
+    <div className="auth-container">
+      <div className="auth-inputContainer">
+        <h2>Prijavljivanje</h2>
+        <input
+          type="email"
+          className="auth-inputField"
+          placeholder="E-mail adresa"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          className="auth-inputField"
+          placeholder="Lozinka"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="button" className="auth-button" onClick={handleClick}>
+          Prijavi se
+        </button>
+        {error && <ErrorMsg>{error}</ErrorMsg>}
+        <span className="auth-otherformlink">
+          <Link to="/register" className="auth-linktoreg">
+            Nemate nalog? <b>Registrujte se ovdje</b>
+          </Link>
+        </span>
       </div>
-    </>
+    </div>
   );
 };
 

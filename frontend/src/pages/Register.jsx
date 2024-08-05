@@ -10,9 +10,9 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPass, setConfPass] = useState("");
-  //const { setToken } = useContext(UserContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const handleRegister = async () => {
     const url = "http://localhost:8000/users/";
     const requestOptions = {
@@ -38,6 +38,7 @@ const Register = () => {
       setError("Neuspješna registracija");
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confPass) {
@@ -48,58 +49,53 @@ const Register = () => {
       handleRegister();
     }
   };
+
   return (
-    <>
-      <div className="container">
-        <div className="inputContainer">
-          {/* Register form */}
-          <input
-            className="inputField"
-            placeholder="korisničko ime"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            className="inputField"
-            placeholder="email adresa"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="inputField"
-            placeholder="lozinka"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="inputField"
-            placeholder="ponovite lozinku"
-            value={confPass}
-            onChange={(e) => setConfPass(e.target.value)}
-            required
-          />
-          {error && <ErrorMsg message={error} />}
-
-          {/* Register button */}
-          <button type="button" className="button" onClick={handleSubmit}>
-            Registruj se
-          </button>
-          {/*end of form */}
-
-          <span className="otherformlink">
-            <Link to="/register" className="linktoreg">
-              Već imate nalog? <b>Prijavite se ovdje</b>
-            </Link>
-          </span>
-        </div>
+    <div className="auth-container">
+      <div className="auth-inputContainer">
+        <h2>Registracija</h2>
+        <input
+          className="auth-inputField"
+          placeholder="Korisničko ime"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          className="auth-inputField"
+          placeholder="E-mail adresa"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          className="auth-inputField"
+          placeholder="Lozinka"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          className="auth-inputField"
+          placeholder="Ponovite lozinku"
+          value={confPass}
+          onChange={(e) => setConfPass(e.target.value)}
+          required
+        />
+        {error && <ErrorMsg message={error} />}
+        <button type="button" className="auth-button" onClick={handleSubmit}>
+          Registruj se
+        </button>
+        <span className="auth-otherformlink">
+          <Link to="/login" className="auth-linktoreg">
+            Već imate nalog? <b>Prijavite se ovdje</b>
+          </Link>
+        </span>
       </div>
-    </>
+    </div>
   );
 };
 
