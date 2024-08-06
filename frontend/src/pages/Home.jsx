@@ -112,7 +112,7 @@ const Home = () => {
   return (
     <>
       <div className="homeContainer">
-        <h1>Dobrodosli</h1>
+        <h1>Dobro došli u Cinema123</h1>
         <div className="button-container">
           <button onClick={() => setView("all")}>Svi filmovi</button>
           <button onClick={() => setView("topRated")}>Najbolje ocjenjeni</button>
@@ -129,7 +129,13 @@ const Home = () => {
                 <p>Duration: {movie.duration} mins</p>
                 <p>Release Date: {movie.release_date}</p>
                 <p>Rating: {movie.rating}</p>
-                <button onClick={() => addToWishlist(movie.id)}>Dodaj u watchlist</button>
+                   {
+                    userId ? (
+                      <button onClick={() => addToWishlist(movie.id)}>Dodaj u watchlist</button>
+                    ):(
+                      <span></span>
+                    )
+                   }
               </div>
             ))}
           </div>

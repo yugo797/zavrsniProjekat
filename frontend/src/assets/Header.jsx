@@ -32,6 +32,9 @@ const Header = () => {
             </Link>
 
           )}
+          <Link to={"/about"} className="navLink">
+            O nama
+          </Link>
         </nav>
         <div className="pImg">
           <Link to={"/profile"} className="pImgLink">

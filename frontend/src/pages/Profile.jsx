@@ -123,17 +123,17 @@ const Profile = () => {
     <>
       <div className="profileContainer">
         <div className="profile">
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
+          <h2 className="naslov">Dobro došli, {user.name}</h2>
+          {/*<p>{user.email}</p>*/}
         </div>
-        <br />
-        <br />
+
         <div className="wishlist">
-          <h3>Movie Wishlist</h3>
+          <h3>Filmovi koje želite da gledate:
+          </h3>
           <ul>
             {wishlist.length === 0 ? (
               <>
-                <li>empu...</li>
+                <li>Vaša lista je prazna.</li>
               </>
             ) : (
               wishlist.map((movie) => <li key={movie}>{movie}</li>)
