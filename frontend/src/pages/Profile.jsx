@@ -131,7 +131,7 @@ const Profile = () => {
           <h3>Filmovi koje želite da gledate:
           </h3>
           <ul>
-            {wishlist.length === 0 ? (
+            {(wishlist.length === 0 || !wishlist) ? (
               <>
                 <li>Vaša lista je prazna.</li>
               </>

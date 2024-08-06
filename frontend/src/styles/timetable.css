@@ -1,0 +1,131 @@
+:root {
+    --background-color: #1a1a1d;
+    --accent-color: #4e4e50;
+    --highlight-color: #c3073f;
+    --text-primary: #e6e6e6;
+    --text-secondary: #cccccc;
+  }
+  
+
+.timetableCont{
+    min-width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+    background-color: var(--accent-color);
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;    
+    flex-direction: column;
+}
+.title {
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+}
+.day-selection-cont{
+    margin-bottom: 2rem;
+}
+.day-selection-cont label{
+    margin-right: 3rem;
+    font-size: 1.3rem;
+}
+.dayselect{
+    padding: 1rem;
+    border: 1px solid var(--highlight-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    width: 10rem;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--highlight-color);
+}
+th{
+    background-color: var(--highlight-color);
+    color: var(--text-primary);
+    padding: 1.2rem;
+}
+td{
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--background-color);
+}
+tbody tr:nth-child(odd){
+    background-color: var(--background-color);
+}
+
+tbody tr:hover{
+    background-color: var(--highlight-color);
+    .buy-ticket-btn{
+        background-color: var(--accent-color);
+    }
+}
+
+.buy-ticket-btn{
+    background-color: var(--highlight-color);
+    color: var(--text-primary);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+.buy-ticket-btn:hover{
+    background-color: var(--background-color);
+    color: var(--highlight-color);
+}
+/*
+<div className="timetableCont">
+            <h1 className="title">Raspored prikazivanja</h1>
+            {error && <p style={{ color: "red" }}>Failed to fetch showtimes: {error}</p>}
+            <div className="day-selection-cont">
+                <label htmlFor="dayselect"> Pretražite po danu: </label>
+                <select
+                    name="dayselect"
+                    id="dayselect"
+                    value={selectedDay}
+                    onChange={handleDayChange}
+                    className="dayselect"
+                >
+                    <option value="">Svi dani</option>
+                    <option value="Monday">Ponedjeljak</option>
+                    <option value="Tuesday">Utorak</option>
+                    <option value="Wednesday">Srijeda</option>
+                    <option value="Thursday">Četvrtak</option>
+                    <option value="Friday">Petak</option>
+                    <option value="Saturday">Subota</option>
+                    <option value="Sunday">Nedjelja</option>
+                </select>
+            </div>
+
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Film</th>
+                            <th>Dan</th>
+                            <th>Vrijeme</th>
+                            <th>Sala</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredShowtimes.map((showtime) => (
+                            <tr key={showtime.id}>
+                                <td>{showtime.movie_id}</td>
+                                <td>{showtime.theater_id}</td>
+                                <td>{new Date(showtime.start_time).toLocaleDateString("bs-BA", { weekday: "long" })}</td>
+                                <td>{new Date(showtime.end_time).toLocaleTimeString("bs-BA")}</td>
+                                <td>{showtime.hall}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+*/
