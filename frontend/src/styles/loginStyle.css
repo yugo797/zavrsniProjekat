@@ -1,5 +1,5 @@
 
-body {
+/*body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -9,16 +9,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}*/
+:root {
+  --background-color: #1a1a1d;
+  --accent-color: #4e4e50;
+  --highlight-color: #c3073f;
+  --text-primary: #e6e6e6;
+  --text-secondary: #cccccc;
 }
-
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1a1a1d; 
+  color: #e6e6e6;
+}
 
 .auth-container {
   display: flex;
   justify-content: center !important;
   align-items: center;
-  height: 100%; 
-  width: 100%; 
+  height: 642px; 
+  width: 100vw; 
   padding: 20px;
+  margin: 0 0 0 0;
+  background-color: var(--background-color);
 }
 
 .auth-inputContainer {
@@ -29,8 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 700px; 
+  max-width: 80%;
   max-height: 700px; 
   border-radius: 40px;
 }

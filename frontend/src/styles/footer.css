@@ -1,15 +1,65 @@
-.footer {
-  max-height: 40px;
-  min-height: 35px;
+:root {
+  --background-color: #1a1a1d;
+  --accent-color: #4e4e50;
+  --highlight-color: #c3073f;
+  --text-primary: #e6e6e6;
+  --text-secondary: #cccccc;
 }
+
+.footer {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  padding: 15px 0;
+  text-align: center;
+  min-height: 35px;
+  max-height: fit-content;
+  overflow-x: hidden;
+  min-width: 99vw;
+  max-width: 100vw;
+}
+
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 29px;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  min-height: fit-content;
 }
+
+.footer-list {
+  margin: 10px;
+  flex: 1 1 200px; /* Flex-grow, flex-shrink, and flex-basis */
+}
+
+.footer-list h4 {
+  margin-bottom: 10px;
+}
+
+.footer-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 668px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-list {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
 .nekinaslov {
+  font-size: 1.2em;
+  font-weight: bold;
   color: white;
-  font-size: 12px;
   font-family: Arial, sans-serif;
 }

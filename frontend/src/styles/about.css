@@ -1,0 +1,165 @@
+:root {
+    --background-color: #1a1a1d;
+    --accent-color: #4e4e50;
+    --highlight-color: #c3073f;
+    --text-primary: #e6e6e6;
+    --text-secondary: #cccccc;
+  }
+  
+  /*MAIN NCONTENT*/
+  .padding-main {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 32px 10%;
+    background-color: var(--accent-color);
+  }
+  
+  .main {
+    min-height: calc(100vh - 300px);
+  }
+  
+  .about {
+    text-align: center;
+  }
+  
+  .about-colored {
+    background-color: var(--accent-color);
+  }
+  
+  .about h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+  }
+  
+  .about p {
+    font-size: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-primary);
+  }
+  
+  .about-info {
+    margin: 3rem 0;
+    display: grid;
+    column-gap: 32px;
+    grid-template-columns: 500px 1fr;
+  }
+  
+  .about-colored .about-info {
+    margin: 3rem 0;
+    display: grid;
+    column-gap: 32px;
+    grid-template-columns: 1fr 500px;
+  }
+  .about-img {
+    border-radius: 30px;
+    overflow: hidden;
+  }
+  .about-img img {
+    width: 100%;
+    border-radius: 30px;
+    margin-top: 55px;
+  }
+  
+  .about-info p {
+    font-size: 1.3rem;
+    text-align: justify;
+    margin-bottom: 2rem;
+  }
+  
+  .about-info .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  
+  .about-colored .about-info .about-content {
+    align-items: flex-start;
+  }
+  
+  .about-info .contact-us {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 12px 24px;
+    /*VOJFOHEGFVHBDEJKJFWIOFBHDFVHSKBVH*/
+    color: #fff;
+    background-color: var(--highlight-color);
+    color: #000000;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  
+  .about-info .contact-us:hover {
+    cursor: pointer;
+    background-color: rgb(39, 39, 39);
+    color: white;
+    border: 2px solid var(--highlight-color);
+    border-radius: 25px;
+    box-shadow: rgba(247, 245, 243, 0.3) 5px 8px 18px 8px;
+  }
+  .par1{
+    margin-bottom: 35px;
+  }
+
+  .par2{
+    margin-top: 35px;
+  }
+  
+  /*team cards*/
+  
+  .team {
+    padding: 100px 50px;
+    text-align: center;
+  }
+  
+  .team h1 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 70px;
+}
+
+.card {
+    background-color: var(--accent-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 6px var(--accent-color);
+    transition: 0.5s;
+    padding: 20px 26px;
+}
+.card-info{
+  color: var(--background-color);
+
+}
+.card:hover {
+    transform: scale(1.1);
+  }
+  
+  .card-img {
+    border-radius: 100%;
+    border: 3px solid var(--accent-color);
+    width: 10rem;
+  }
+  
+  .card-name {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .card-role {
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+  
+  .card-email {
+    font-size: 1rem;
+      }
