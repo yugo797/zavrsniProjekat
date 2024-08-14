@@ -7,8 +7,9 @@ const Footer = () => {
 
   useEffect(() => {
     const fetchLocations = async () => {
+      const locationid = 1;
       try {
-        const response = await fetch("http://localhost:8000/location/");
+        const response = await fetch(`http://localhost:8000/location/${locationid}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -40,11 +41,11 @@ const Footer = () => {
             <p>Error: {error}</p>
           ) : (
             <ul>
-              {locations.map((location) => (
-                <li key={location.id}>
-                  {location.city}, {location.country} - {location.place}
+              {
+                <li>
+                  {locations.city}, {locations.country} - {locations.place}
                 </li>
-              ))}
+              }
             </ul>
           )}
         </div>

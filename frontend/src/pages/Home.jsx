@@ -7,6 +7,7 @@ const Home = () => {
   const [view, setView] = useState("all");
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [btnTxt, setBtnTxt] = useState("Dodaj na listu želja");
   const { userId, token1 } = useContext(UserContext);
 
   useEffect(() => {
@@ -100,6 +101,7 @@ const Home = () => {
         });
         if (updateResp.ok) {
           console.log(`Movie ${movieId} added to wishlist ${wishlistId}`);
+          setBtnTxt("Dodato!");
         } else {
           console.error("Failed to add movie to wishlist");
         }
@@ -112,7 +114,7 @@ const Home = () => {
   return (
     <>
       <div className="homeContainer">
-        <h1>Dobro došli u Cinema123</h1>
+        <h1>Dobro došli u Cinema213</h1>
         <div className="button-container">
           <button onClick={() => setView("all")}>Svi filmovi</button>
           <button onClick={() => setView("topRated")}>Najbolje ocjenjeni</button>
@@ -131,7 +133,7 @@ const Home = () => {
                 <p>Rating: {movie.rating}</p>
                    {
                     userId ? (
-                      <button onClick={() => addToWishlist(movie.id)}>Dodaj u watchlist</button>
+                      <button onClick={() => addToWishlist(movie.id)}>{btnTxt}</button>
                     ):(
                       <span></span>
                     )
