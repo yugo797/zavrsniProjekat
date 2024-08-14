@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from .movie import Movie
 
 
 class WishlistBase(BaseModel):
@@ -11,12 +12,12 @@ class WishlistCreate(WishlistBase):
 
 
 class WishlistUpdate(WishlistBase):
-    pass
+    movie_ids: List[int]
 
 
 class Wishlist(WishlistBase):
     id: int
-    movie_ids: List[int] = []
+    movies: List[Movie] = []
 
     class Config:
-        from_attributes = True  
+        from_attributes = True
