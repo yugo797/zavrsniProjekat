@@ -48,3 +48,7 @@ def delete_existing_wishlist_item(wishlist_id: int, db: Session = Depends(get_db
         raise HTTPException(
             status_code=403, detail="Not authorized to delete this wishlist")
     return db_wishlist
+
+@router.get("/all", response_model=List[Wishlist])
+def read_all_wishlists(db: Session = Depends(get_db)):
+    return get_all_wishlists(db)

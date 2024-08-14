@@ -6,7 +6,9 @@ from schemas.wishlist import WishlistCreate
 
 def get_wishlist(db: Session, wishlist_id: int):
     return db.query(Wishlist).filter(Wishlist.id == wishlist_id).first()
-
+    
+def get_all_wishlists(db: Session):
+    return db.query(Wishlist).all()
 
 def get_wishlist_by_user(db: Session, user_id: int):
     wishlist = db.query(Wishlist).filter(Wishlist.user_id == user_id).first()
