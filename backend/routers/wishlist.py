@@ -6,7 +6,7 @@ from schemas.user import User
 from database import get_db
 from dependencies import get_current_user
 from typing import List
-from crud.wishlist import get_wishlist, get_wishlists_by_user, create_wishlist, update_wishlist, delete_wishlist
+from crud.wishlist import get_wishlist, get_wishlist_by_user, create_wishlist, update_wishlist, delete_wishlist, get_all_wishlists
 router = APIRouter()
 
 
@@ -35,7 +35,7 @@ async def create_new_wishlist(wishlist: WishlistCreate, db: Session = Depends(ge
 
 @router.get("/", response_model=List[Wishlist])
 async def read_wishlists_by_user(user_id: int, db: Session = Depends(get_db)):
-    wishlists = get_wishlists_by_user(db, user_id=user_id)
+    wishlists = get_wishlist_by_user(db, user_id=user_id)
     if not wishlists:
         raise HTTPException(status_code=404, detail="Wishlists not found")
     return wishlists
