@@ -1,0 +1,104 @@
+.admin-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.admin-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.admin-buttons {
+  margin-bottom: 20px;
+}
+
+.admin-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.admin-button:hover {
+  background-color: #0056b3;
+}
+
+.admin-content {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.admin-search {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.admin-movie-form {
+  margin-bottom: 20px;
+}
+
+.admin-form-title {
+  margin-bottom: 20px;
+}
+
+.admin-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.admin-submit-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-submit-button:hover {
+  background-color: #218838;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+.admin-table tbody tr:nth-child(odd) {
+  color: white;
+}
+.admin-action-button {
+  padding: 5px 10px;
+  background-color: #ffc107;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.admin-action-button:hover {
+  background-color: #e0a800;
+}
