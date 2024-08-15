@@ -46,30 +46,33 @@ const Home = () => {
     setFilteredMovies(filtered);
   };
 
-  const addToWishlist = async (movieId) => {
+  const addToWishlist = async (movieId, userId) => {
+    console.log("Adding movie to wishlist, movie id: ", movieId);
     const token = localStorage.getItem("access_token");
     try {
-      const resp = await fetch(`http://localhost:8000/wishlist/${userId}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const resp = await fetch(
+        `http://localhost:8000/wishlist/?user_id=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const wishlist = await resp.json();
       let wishlistId = null;
+      let movieids = [];
+
       if (wishlist.length > 0) {
         wishlistId = wishlist[0].id;
+        movieids = wishlist[0].movies || [];
 
-        const movieExists = wishlist[0].movie_ids.includes(movieId);
-        if (movieExists) {
+        if (movieids.includes(movieId)) {
           console.log(`Movie ${movieId} already in wishlist`);
           return;
         }
-      }
-
-      if (!wishlistId) {
-        console.log(`Creating new wishlist for user ${userId}`);
-        const createResp = await fetch(`http://localhost:8000/wishlist/`, {
+      } else {
+        const createResp = await fetch("http://localhost:8000/wishlist/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -80,31 +83,46 @@ const Home = () => {
             movie_ids: [movieId],
           }),
         });
+
         if (createResp.ok) {
-          const newWL = await createResp.json();
-          wishlistId = newWL.id;
-          console.log(`new wishlist ${wishlistId}`);
+          console.log("Wishlist created");
+          const data = await createResp.json();
+          wishlistId = data.id;
+          movieids = data.movies || [];
+          console.log(`Created new wishlist with ID ${wishlistId}`);
+          console.log(`data for the creation:`, data);
         } else {
-          console.error("Failed to add movie to wishlist");
+          console.error("Failed to create wishlist");
           return;
         }
-      } else {
-        const updateResp = await fetch(`http://localhost:8000/wishlist/${wishlistId}`, {
+      }
+      movieids.push(movieId);
+      console.log("Movieids after push: ", movieids);
+      movieids = movieids.map((id) => (typeof id === "number" ? id : id.id));
+
+      const requestBody = {
+        user_id: userId,
+        movie_ids: movieids,
+      };
+      console.log("Sending PUT request with body:", requestBody);
+
+      const updateResp = await fetch(
+        `http://localhost:8000/wishlist/${wishlistId}`,
+        {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            movie_ids: [...wishlist[0].movie_ids, movieId],
-          }),
-        });
-        if (updateResp.ok) {
-          console.log(`Movie ${movieId} added to wishlist ${wishlistId}`);
-          setBtnTxt("Dodato!");
-        } else {
-          console.error("Failed to add movie to wishlist");
+          body: JSON.stringify(requestBody),
         }
+      );
+
+      if (updateResp.ok) {
+        console.log(`Movie ${movieId} added to wishlist`);
+      } else {
+        console.error("Failed to add movie to wishlist");
+        return;
       }
     } catch (error) {
       console.error("Error adding movie to wishlist: ", error);
@@ -117,8 +135,12 @@ const Home = () => {
         <h1>Dobro došli u Cinema213</h1>
         <div className="button-container">
           <button onClick={() => setView("all")}>Svi filmovi</button>
-          <button onClick={() => setView("topRated")}>Najbolje ocjenjeni</button>
-          <button onClick={() => setView("currentlyShowing")}>Trenutno u bioskopu</button>
+          <button onClick={() => setView("topRated")}>
+            Najbolje ocjenjeni
+          </button>
+          <button onClick={() => setView("currentlyShowing")}>
+            Trenutno u bioskopu
+          </button>
           <button onClick={() => setView("upcoming")}>Uskoro</button>
         </div>
         <div className="movies-container">
@@ -131,13 +153,13 @@ const Home = () => {
                 <p>Duration: {movie.duration} mins</p>
                 <p>Release Date: {movie.release_date}</p>
                 <p>Rating: {movie.rating}</p>
-                   {
-                    userId ? (
-                      <button onClick={() => addToWishlist(movie.id)}>{btnTxt}</button>
-                    ):(
-                      <span></span>
-                    )
-                   }
+                {userId ? (
+                  <button onClick={() => addToWishlist(movie.id, userId)}>
+                    {btnTxt}
+                  </button>
+                ) : (
+                  <span></span>
+                )}
               </div>
             ))}
           </div>

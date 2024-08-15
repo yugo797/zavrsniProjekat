@@ -34,7 +34,7 @@ async def create_new_wishlist(wishlist: WishlistCreate, db: Session = Depends(ge
 
 
 @router.get("/", response_model=List[Wishlist])
-async def read_wishlists_by_user(user_id: int, db: Session = Depends(get_db)):
+async def read_wishlists_by_user(user_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     wishlists = get_wishlist_by_user(db, user_id=user_id)
     if not wishlists:
         raise HTTPException(status_code=404, detail="Wishlists not found")
